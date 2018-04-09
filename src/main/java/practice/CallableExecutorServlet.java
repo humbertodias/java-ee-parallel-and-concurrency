@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -19,25 +20,17 @@ public class CallableExecutorServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        PrintWriter writer = response.getWriter();
+        try (PrintWriter writer = response.getWriter()) {
 
-        Future<Long> futureResult = executor.submit(new CallableTask(5));
+//        Future<Long> futureResult = executor.submit(new CallableTask(5));
+            Future<Long> futureResult = executor.submit(new CallableListenerTask(5));
 
-        while (!futureResult.isDone()) {
-
-            // Wait
-            try {
-                //TimeUnit.SECONDS.sleep(1);
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            while (!futureResult.isDone()) {
+                Util.delay();
             }
 
-        }
-
-        try {
             writer.write("Callable Task returned " + futureResult.get());
-        } catch ( Exception e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 

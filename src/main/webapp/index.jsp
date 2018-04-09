@@ -4,6 +4,10 @@
     <title>Title</title>
 </head>
 <body>
-<a href="ExecutorServlet" target="_blank">ExecutorServlet</a> | <a href="CallableExecutorServlet" target="_blank">CallableExecutorServlet</a>
+<a href="ExecutorServlet" target="_blank">ExecutorServlet</a> |
+<a href="CallableExecutorServlet" target="_blank">CallableExecutorServlet</a> |
+<a href="ScheduledExecutor" target="_blank">ScheduledExecutor</a> |
+<a href="FactoryExecutorServlet" target="_blank">FactoryExecutorServlet</a> |
+<a href="FactoryExecutorServiceServlet" target="_blank">FactoryExecutorServiceServlet</a>
 </body>
 </html>

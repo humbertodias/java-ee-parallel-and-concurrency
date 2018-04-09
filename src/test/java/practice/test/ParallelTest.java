@@ -1,6 +1,7 @@
 package practice.test;
 
 import org.junit.jupiter.api.Test;
+import practice.Util;
 
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
