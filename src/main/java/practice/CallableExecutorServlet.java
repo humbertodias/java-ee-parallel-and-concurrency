@@ -1,3 +1,5 @@
+package practice;
+
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +27,8 @@ public class CallableExecutorServlet extends HttpServlet {
 
             // Wait
             try {
-                TimeUnit.SECONDS.sleep(1);
-                //Thread.sleep(100);
+                //TimeUnit.SECONDS.sleep(1);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
