@@ -17,23 +17,23 @@ public class SortTest {
 
 
     @Test
-    public void sortReverse(){
+    public void sortReverse() {
 
         List<Integer> collected = range.boxed()
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
         List expectedReverse = Util.reverse(expected);
-        assertEquals(expectedReverse,collected);
+        assertEquals(expectedReverse, collected);
 
     }
 
     @Test
-    public void sort(){
+    public void sort() {
 
         List<Integer> collected = range.boxed()
                 .sorted()
                 .collect(Collectors.toList());
-        assertEquals(expected,collected);
+        assertEquals(expected, collected);
 
     }
 

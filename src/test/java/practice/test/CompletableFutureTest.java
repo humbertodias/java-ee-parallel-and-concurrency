@@ -16,13 +16,13 @@ public class CompletableFutureTest {
     @BeforeClass
     public void setUp() {
         currentId = 0;
-   }
+    }
 
     private CompletableFuture<Integer> getNextIdAsync() {
         return CompletableFuture.completedFuture(nextId());
     }
 
-    private Integer nextId(){
+    private Integer nextId() {
         Util.delay();
         return currentId++;
     }

@@ -14,17 +14,17 @@ public class ParallelTest {
     IntStream range = IntStream.rangeClosed(1, 10);
 
     @Test
-    public void sum(){
+    public void sum() {
         assertEquals(55, range.sum());
     }
 
     @Test
-    public void sumParallel(){
+    public void sumParallel() {
         assertEquals(55, range.parallel().sum());
     }
 
     @Test
-    public void count(){
+    public void count() {
         assertEquals(10, range.count());
     }
 
@@ -79,9 +79,15 @@ public class ParallelTest {
     public void tasksInParallel() throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(3);
 
-        Runnable task1 = () -> { Util.delay(2); };
-        Runnable task2 = () -> { Util.delay(3); };
-        Runnable task3 = () -> { Util.delay(3); };
+        Runnable task1 = () -> {
+            Util.delay(2);
+        };
+        Runnable task2 = () -> {
+            Util.delay(3);
+        };
+        Runnable task3 = () -> {
+            Util.delay(3);
+        };
 
         long begin = System.currentTimeMillis();
 

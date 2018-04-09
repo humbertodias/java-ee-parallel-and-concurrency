@@ -10,11 +10,13 @@ public class ThreadWithAtomicTest {
 
     class CounterAtomic {
         private AtomicInteger count = new AtomicInteger();
+
         // we don't need synchronized here, because count++ now is threadSafe
         public void increment() {
             count.getAndIncrement();
         }
-        public int getCount(){
+
+        public int getCount() {
             return count.intValue();
         }
     }
@@ -26,7 +28,7 @@ public class ThreadWithAtomicTest {
         CounterAtomic counter = new CounterAtomic();
 
         Runnable task = () -> {
-            for(int i=0; i < expected; i++) {
+            for (int i = 0; i < expected; i++) {
                 counter.increment();
             }
         };

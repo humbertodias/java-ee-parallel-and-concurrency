@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FilterTest {
 
-    List words = List.of("one","two","three","four","five");
+    List words = List.of("one", "two", "three", "four", "five");
 
     @Test
-    public void filter(){
+    public void filter() {
         Predicate<String> predicate = word -> word.contains("o");
         long count = words
                 .stream()

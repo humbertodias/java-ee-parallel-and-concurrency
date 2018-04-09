@@ -13,7 +13,7 @@ public class ReduceTest {
     DoubleStream doubleStream = DoubleStream.of(1.0, 2.0, 3.0, 4.0);
 
     @Test
-    public void reduceWithoutLambdaDoubles(){
+    public void reduceWithoutLambdaDoubles() {
         DoubleBinaryOperator doubleBinaryOperator = new DoubleBinaryOperator() {
             @Override
             public double applyAsDouble(double left, double right) {
@@ -25,7 +25,7 @@ public class ReduceTest {
     }
 
     @Test
-    public void reduceWithLambdaDoubles(){
+    public void reduceWithLambdaDoubles() {
         DoubleBinaryOperator doubleBinaryOperator = (left, right) -> left + right;
         OptionalDouble reduce = doubleStream.reduce(doubleBinaryOperator);
         assertEquals(10.0, reduce.getAsDouble(), 0.1);

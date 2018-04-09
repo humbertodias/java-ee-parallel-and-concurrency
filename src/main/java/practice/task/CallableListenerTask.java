@@ -1,4 +1,4 @@
-package practice;
+package practice.task;
 
 import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.enterprise.concurrent.ManagedTask;

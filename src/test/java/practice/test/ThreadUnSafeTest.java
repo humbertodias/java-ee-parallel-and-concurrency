@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ThreadUnSafeTest {
 
-    class Counter{
+    class Counter {
         private int count = 0;
+
         // synchronized, because count++ is not thread safe
-        public synchronized void increment(){
+        public synchronized void increment() {
             count++;
         }
-        public int getCount(){
+
+        public int getCount() {
             return count;
         }
     }
@@ -24,7 +26,7 @@ public class ThreadUnSafeTest {
         Counter counter = new Counter();
 
         Runnable task = () -> {
-            for(int i=0; i < expected; i++) {
+            for (int i = 0; i < expected; i++) {
                 counter.increment();
             }
         };

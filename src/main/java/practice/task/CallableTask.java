@@ -1,4 +1,4 @@
-package practice;
+package practice.task;
 
 import java.util.concurrent.Callable;
 

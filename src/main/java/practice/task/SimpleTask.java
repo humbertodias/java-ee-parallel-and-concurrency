@@ -1,4 +1,4 @@
-package practice;
+package practice.task;
 
 public class SimpleTask implements Runnable {
 

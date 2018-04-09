@@ -1,8 +1,9 @@
-package practice;
+package practice.servlet;
+
+import practice.task.SimpleTask;
 
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedScheduledExecutorService;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ public class ScheduledExecutor extends HttpServlet {
     @Resource(name = "DefaultManagedScheduledExecutorService")
     ManagedScheduledExecutorService scheduledExecutor;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         try (PrintWriter writer = response.getWriter()) {
             ScheduledFuture<?> futureResult = scheduledExecutor.schedule(new SimpleTask(), 10, TimeUnit.SECONDS);

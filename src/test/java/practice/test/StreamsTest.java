@@ -15,28 +15,28 @@ public class StreamsTest {
     IntStream range = IntStream.rangeClosed(1, 10);
 
     @Test
-    public void filter(){
+    public void filter() {
 
         List<Integer> collected = range
-                .filter( Util.evenNumber)
+                .filter(Util.evenNumber)
                 .boxed()
                 .collect(Collectors.toList());
 
-        assertEquals(expected,collected);
+        assertEquals(expected, collected);
 
     }
 
 
     @Test
-    public void filterParallel(){
+    public void filterParallel() {
 
         List<Integer> collected = range
                 .parallel()
-                .filter( Util.evenNumber)
+                .filter(Util.evenNumber)
                 .boxed()
                 .collect(Collectors.toList());
 
-        assertEquals(expected,collected);
+        assertEquals(expected, collected);
 
     }
 

@@ -1,4 +1,4 @@
-package practice;
+package practice.ejb;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

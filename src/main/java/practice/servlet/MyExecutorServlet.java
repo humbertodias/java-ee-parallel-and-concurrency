@@ -1,4 +1,6 @@
-package practice;
+package practice.servlet;
+
+import practice.task.SimpleTask;
 
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
@@ -20,7 +22,7 @@ public class MyExecutorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter writer = response.getWriter();
         executor.execute(new SimpleTask());
-        writer.write("Task practice.SimpleTask executed! check logs");
+        writer.write("Task practice.task.SimpleTask executed! check logs");
     }
 
 }
