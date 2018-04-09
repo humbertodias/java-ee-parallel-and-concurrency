@@ -1,9 +1,12 @@
-import org.junit.Assert;
-import org.junit.Test;
+package practice.test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.OptionalDouble;
 import java.util.function.DoubleBinaryOperator;
 import java.util.stream.DoubleStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReduceTest {
 
@@ -18,14 +21,14 @@ public class ReduceTest {
             }
         };
         OptionalDouble reduce = doubleStream.reduce(doubleBinaryOperator);
-        Assert.assertEquals(10.0, reduce.getAsDouble(), 0);
+        assertEquals(10.0, reduce.getAsDouble(), 0.1);
     }
 
     @Test
     public void reduceWithLambdaDoubles(){
         DoubleBinaryOperator doubleBinaryOperator = (left, right) -> left + right;
         OptionalDouble reduce = doubleStream.reduce(doubleBinaryOperator);
-        Assert.assertEquals(10.0, reduce.getAsDouble(), 0);
+        assertEquals(10.0, reduce.getAsDouble(), 0.1);
     }
 
 }

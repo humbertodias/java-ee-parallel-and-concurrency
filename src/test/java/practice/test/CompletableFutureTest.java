@@ -1,17 +1,18 @@
+package practice.test;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CompletableFutureTest {
 
     private static int currentId;
 
-    @Before
+    @BeforeClass
     public void setUp() {
         currentId = 0;
    }

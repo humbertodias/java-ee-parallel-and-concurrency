@@ -1,17 +1,21 @@
-import org.junit.Test;
+package practice.test;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
-public class ThreadUnSafeTest {
+import java.util.concurrent.atomic.AtomicInteger;
 
-    class Counter{
-        private int count = 0;
-        // synchronized, because count++ is not thread safe
-        public synchronized void increment(){
-            count++;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class ThreadWithAtomicTest {
+
+    class CounterAtomic {
+        private AtomicInteger count = new AtomicInteger();
+        // we don't need synchronized here, because count++ now is threadSafe
+        public void increment() {
+            count.getAndIncrement();
         }
         public int getCount(){
-            return count;
+            return count.intValue();
         }
     }
 
@@ -19,7 +23,7 @@ public class ThreadUnSafeTest {
     public void threadCount() throws InterruptedException {
 
         int expected = 1_000_000;
-        Counter counter = new Counter();
+        CounterAtomic counter = new CounterAtomic();
 
         Runnable task = () -> {
             for(int i=0; i < expected; i++) {

@@ -1,11 +1,12 @@
-import org.junit.Assert;
-import org.junit.Test;
+package practice.test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParallelTest {
 
@@ -59,15 +60,15 @@ public class ParallelTest {
         long end = System.currentTimeMillis();
         long timeSpend = end - begin;
 
-        Assert.assertTrue(submit1.isDone());
-        Assert.assertTrue(submit2.isDone());
-        Assert.assertTrue(submit3.isDone());
+        assertTrue(submit1.isDone());
+        assertTrue(submit2.isDone());
+        assertTrue(submit3.isDone());
 
         assertTrue(timeSpend >= 3000 && timeSpend <= 3500);
 
-        Assert.assertTrue(s1.contains("thread-1"));
-        Assert.assertTrue(s2.contains("thread-2"));
-        Assert.assertTrue(s3.contains("thread-3"));
+        assertTrue(s1.contains("thread-1"));
+        assertTrue(s2.contains("thread-2"));
+        assertTrue(s3.contains("thread-3"));
 
         executorService.shutdown();
 
@@ -94,9 +95,9 @@ public class ParallelTest {
         long end = System.currentTimeMillis();
         long timeSpend = end - begin;
 
-        Assert.assertTrue(submit1.isDone());
-        Assert.assertTrue(submit2.isDone());
-        Assert.assertTrue(submit3.isDone());
+        assertTrue(submit1.isDone());
+        assertTrue(submit2.isDone());
+        assertTrue(submit3.isDone());
 
         assertTrue(timeSpend >= 3000 && timeSpend <= 3500);
 
