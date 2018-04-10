@@ -22,6 +22,13 @@ mvn wildfly:run
 
 
 
+Stress Test
+
+```
+time curl -s "http://localhost:8080/EntityManagerServlet?[1-1000]"
+```
+
+
 
 References
 
