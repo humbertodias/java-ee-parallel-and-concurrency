@@ -3,19 +3,25 @@ package practice.servlet;
 import practice.model.Movie;
 import practice.model.Veiculo;
 
+import javax.annotation.Resource;
+import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import javax.transaction.UserTransaction;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 
 @WebServlet("/EntityManagerServlet")
@@ -27,12 +33,35 @@ public class EntityManagerServlet extends HttpServlet {
 
     boolean first = true;
 
+    @Resource(name = "DefaultManagedExecutorService")
+    ManagedExecutorService executor;
+
+    @Resource
+    private UserTransaction userTransaction;
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         if(first){
             createDB();
             first=false;
+        }
+        else{
+
+            Callable<Movie> task = () -> {
+                Movie movie = randomMovie();
+                userTransaction.begin();
+                entityManager.persist( movie );
+                userTransaction.commit();
+                return movie;
+            };
+
+            try {
+                executor.submit(task).get();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+
         }
 
         try(PrintWriter writer = response.getWriter()){
@@ -64,11 +93,8 @@ public class EntityManagerServlet extends HttpServlet {
         veiculos.add(new Veiculo(11, "Jaguar", " XF R-Sport", "disponible", "https://www.localiza.com/brasil-site/geral/Frota/JXFR.png", "SP - SUPER PRIME", 120.0f, "Características: 4 portas  Ar-condicionado  Vidro elétrico  Trava elétrica  Air bag  Automático  Banco de Couro  5 pessoas  3 mala(s) grande(s)  2 mala(s) pequena(s)"));
         veiculos.add(new Veiculo(12, "Audi", "A4 Sedan 2.0", "disponible", "https://www.localiza.com/brasil-site/geral/Frota/AUDL.png", "LP -PRIME", 110.0f, "Características :4 portas  Ar-condicionado  Vidro elétrico  Trava elétrica  Air bag  Automático  Banco de Couro  ABS  Direção Elétrica  5 pessoas  3 mala(s) grande(s)"));
 
-        Consumer<Veiculo> consumerVeiculo = veiculo -> {
-            entityManager.persist(veiculo);
-        };
+        Consumer<Veiculo> consumerVeiculo = veiculo -> entityManager.persist(veiculo);
         veiculos.forEach(consumerVeiculo);
-
 
         List movies = new ArrayList<Movie>();
         movies.add(new Movie("Quentin Tarantino", "Reservoir Dogs", 1992));
@@ -79,4 +105,14 @@ public class EntityManagerServlet extends HttpServlet {
         movies.forEach(consumerMovie);
 
     }
+
+
+    private Movie randomMovie(){
+        Random rnd = new Random();
+        String director = Thread.currentThread().getName();
+        String title = LocalTime.now().toString();
+        int year = rnd.nextInt(1900 + 2050);
+        return new Movie(director, title, year);
+    }
+
 }

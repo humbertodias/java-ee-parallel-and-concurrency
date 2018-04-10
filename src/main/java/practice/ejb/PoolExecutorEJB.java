@@ -13,16 +13,12 @@ import java.util.concurrent.TimeUnit;
 @Singleton
 public class PoolExecutorEJB {
 
-    private ExecutorService threadPoolExecutor = null;
-
     int corePoolSize = 5;
-
     int maxPoolSize = 10;
-
     long keepAliveTime = 5000;
-
     @Resource(name = "DefaultManagedThreadFactory")
     ManagedThreadFactory factory;
+    private ExecutorService threadPoolExecutor = null;
 
     public ExecutorService getThreadPoolExecutor() {
 
@@ -34,10 +30,8 @@ public class PoolExecutorEJB {
     public void init() {
 
         threadPoolExecutor = new ThreadPoolExecutor(corePoolSize, maxPoolSize,
-
                 keepAliveTime, TimeUnit.SECONDS,
-
-                new ArrayBlockingQueue<Runnable>(10), factory);
+                new ArrayBlockingQueue<>(10), factory);
 
     }
 

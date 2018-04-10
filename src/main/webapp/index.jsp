@@ -9,6 +9,7 @@
 <a href="ScheduledExecutor" target="_blank">ScheduledExecutor</a> |
 <a href="FactoryExecutorServlet" target="_blank">FactoryExecutorServlet</a> |
 <a href="FactoryExecutorServiceServlet" target="_blank">FactoryExecutorServiceServlet</a> |
-<a href="EntityManagerServlet" target="_blank">EntityManagerServlet</a>
+<a href="EntityManagerServlet" target="_blank">EntityManagerServlet</a> |
+<a href="SingleThreadServlet" target="_blank">SingleThreadServlet</a> |
 </body>
 </html>
