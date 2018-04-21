@@ -3,7 +3,7 @@
 
 Requires
 
-* Java 8+
+* Java 9+
 * Maven 3+
 
 Test 
